@@ -1,4 +1,4 @@
-
+## Prefer
 syntax on
 colorscheme slate
 
@@ -9,8 +9,3 @@ set expandtab
 set showmatch
 set smartindent
 set smarttab
-
-
- 
-
-
