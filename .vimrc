@@ -1,5 +1,5 @@
 syntax on
-colorscheme slate
+colorscheme ron
 
 set number
 set linebreak 
@@ -7,12 +7,14 @@ set expandtab
 set showmatch
 set smartindent
 set smarttab
-set spell
 set visualbell   
 set hlsearch   
 set ignorecase    
-set autoindent  
-set softtabstop=4 
+set autoindent
+set cindent
+set expandtab
+set tabstop=2
+set shiftwidth=2
 set ruler        
 set undolevels=1000     
 set backspace=indent,eol,start                
