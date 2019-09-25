@@ -1,6 +1,7 @@
 syntax on
 colorscheme ron
 hi StatusLine ctermbg=Yellow ctermfg=DarkGray
+hi StatusLineNC ctermbg=Black ctermfg=DarkGray
 
 set number
 set linebreak 
