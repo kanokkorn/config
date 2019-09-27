@@ -1,6 +1,6 @@
 syntax on
 colorscheme ron
-hi StatusLine ctermbg=Yellow ctermfg=DarkGray
+hi StatusLine ctermbg=Black ctermfg=DarkMagenta
 hi StatusLineNC ctermbg=Black ctermfg=DarkGray
 
 set number
