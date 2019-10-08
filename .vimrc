@@ -1,7 +1,8 @@
 syntax on
-colorscheme ron
-hi StatusLine ctermbg=Black ctermfg=DarkMagenta
-hi StatusLineNC ctermbg=Black ctermfg=DarkGray
+colorscheme slate
+hi StatusLine ctermbg=lightgreen ctermfg=DarkGray
+hi StatusLineNC ctermbg=lightred ctermfg=DarkGray
+set fillchars+=vert:│
 
 set number
 set linebreak 
