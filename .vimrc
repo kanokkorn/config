@@ -2,7 +2,7 @@ syntax on
 colorscheme slate
 hi StatusLine ctermbg=lightgreen ctermfg=DarkGray
 hi StatusLineNC ctermbg=lightred ctermfg=DarkGray
-set fillchars+=vert:â”‚
+set fillchars+=vert:¦
 
 set number
 set linebreak 
