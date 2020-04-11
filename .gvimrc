@@ -9,7 +9,7 @@ hi StatusLineNC ctermbg=lightred ctermfg=DarkGray
 " set guifont=Cascadia_Code:h16:cANSI:qDRAFT
 
 set guifont=Consolas:h16
-set fillchars+=vert:¦
+set fillchars+=vert:ï¿½
 set number
 set linebreak 
 set expandtab
@@ -18,6 +18,7 @@ set smartindent
 set smarttab
 set visualbell   
 set hlsearch   
+set incsearch
 set ignorecase    
 set autoindent
 set cindent
