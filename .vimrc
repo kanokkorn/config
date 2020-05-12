@@ -1,8 +1,8 @@
 syntax on
 colorscheme slate
-hi StatusLine ctermbg=lightgreen ctermfg=DarkGray
-hi StatusLineNC ctermbg=lightred ctermfg=DarkGray
-set fillchars+=vert:�
+hi StatusLine ctermbg=105 ctermfg=236
+hi StatusLineNC ctermbg=240 ctermfg=236
+hi VertSplit ctermfg=236
 
 set number
 set linebreak 
