@@ -1,0 +1,50 @@
+{
+    "files.autoSave": "off",
+    "debug.toolBarLocation": "docked",
+    "workbench.iconTheme": "material-icon-theme",
+    "git.autofetch": true,
+    "liveshare.featureSet": "insiders",
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    "terminal.integrated.rendererType": "dom",
+    "python.insidersChannel": "off",
+    "dart.flutterSdkPath": "C:\\flutter",
+    "extensions.ignoreRecommendations": true,
+    "screencastMode.onlyKeyboardShortcuts": true,
+    "editor.tabSize": 2,
+    "cmake.configureOnOpen": true,
+    "editor.fontFamily": "Cascadia Code, 'Courier New', monospace",
+    "editor.fontLigatures": true,
+    "editor.minimap.enabled": false,
+    "workbench.colorTheme": "One Dark Pro Monokai Darker",
+    "files.eol": "\n",
+    "workbench.startupEditor": "none",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "liveServer.settings.donotShowInfoMsg": true,
+    "vim.history": 1000,
+    "python.languageServer": "Pylance",
+    "python.formatting.provider": "yapf",
+    "python.formatting.yapfArgs": [
+      "--style",
+      "{based_on_style: chromium, indent_width: 20}",
+      "--in-place"
+    ],
+    "liveServer.settings.donotVerifyTags": true,
+    "[cpp]": {
+      "editor.defaultFormatter": "ms-vscode.cpptools"
+    },
+    "dart.checkForSdkUpdates": false,
+    "[dart]": {
+      "editor.formatOnSave": true,
+      "editor.formatOnType": true,
+      "editor.rulers": [
+        80
+      ],
+      "editor.selectionHighlight": false,
+      "editor.suggest.snippetsPreventQuickSuggestions": false,
+      "editor.suggestSelection": "first",
+      "editor.tabCompletion": "onlySnippets",
+      "editor.wordBasedSuggestions": false
+    },
+    "C_Cpp.updateChannel": "Insiders",
+}
