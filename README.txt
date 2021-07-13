@@ -1,8 +1,14 @@
-copy files to home directory 
+configuration files
+-------------------
 
-cp .vimrc .tmux.conf ~/
+This repo contain these program config files
 
-install prerequisites and setup
-
-wget https://raw.githubusercontent.com/kanokkorn/config/master/config.sh && sudo chmod +x config.sh && ./config
+- bash
+- urxvt
+- tmux
+- vim
+- gvim
+- neovim
+- gdb
+- vscode
 
