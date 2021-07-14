@@ -10,7 +10,7 @@ Plug 'preservim/nerdtree'
 call plug#end()
 
 colo onedark
-set guifont=Cascadia_Code\ Code:h12
+set guifont=Cascadia \Code:h12
 
 set number	
 set linebreak	
