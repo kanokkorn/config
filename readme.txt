@@ -7,6 +7,7 @@ This repo contain these program config files
 - bspwm
 - gdb
 - gvim
+- picom
 - polybar
 - sxhkd
 - tmux
