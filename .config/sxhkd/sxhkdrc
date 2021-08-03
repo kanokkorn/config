@@ -6,9 +6,13 @@
 super + Return
 	urxvt
 
-# program launcher
+# language switcher
 super + @space
-	rofi -show run
+  {setxkbmap th, setxkbmap us}
+
+# program launcher
+alt + space
+  rofi -modi drun -drun-use-desktop-cache -show drun
 
 # screenshot
 Print
