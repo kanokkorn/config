@@ -1,6 +1,6 @@
 # vim:ft=cfg
 [global]
-    font = Fira Code 12
+    font = Monospace Code 12
 
     # allow a small subset of html markup:
     # <b>bold</b>
@@ -51,6 +51,7 @@
     ignore_newline = no
 
     max_icon_size = 80
+    corner_radius = 15
 
     # the geometry of the window
     # geometry [{width}]x{height}[+/-{x}+/-{y}]
