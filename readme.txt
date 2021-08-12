@@ -5,6 +5,7 @@ This repo contain these program config files
 
 - bash
 - bspwm
+- dunst
 - gdb
 - gvim
 - picom
