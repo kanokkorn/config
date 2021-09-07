@@ -6,7 +6,11 @@ Plug 'junegunn/vim-easy-align'
 Plug 'iCyMind/NeoSolarized'
 Plug 'joshdick/onedark.vim'
 Plug 'tomasr/molokai'
+Plug 'junegunn/vim-easy-align'
+Plug 'joshdick/onedark.vim'
+Plug 'sickill/vim-monokai'
 Plug 'sainnhe/sonokai'
+Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'iCyMind/NeoSolarized'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -19,6 +23,12 @@ let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
+
+" sonokai
+let g:sonokai_style = 'atlantis'
+
+" color
+colo sonokai
 
 " unicode symbols
 let g:airline_left_sep = '»'
