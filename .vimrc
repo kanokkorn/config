@@ -11,6 +11,7 @@ hi Search ctermfg=141 ctermbg=238
 let g:netrw_altv=1
 let g:netrw_liststyle=3
 
+set mouse=a
 set number
 set linebreak 
 set expandtab
