@@ -6,8 +6,8 @@ URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 ! URxvt*blurRadius: 10
 ! URxvt.transparent:   true
 URxvt.tintColor:     white
-URxvt.shading:       30
-URxvt.font: xft:Fira Code:pixelsize=16
+URxvt.shading:       0
+URxvt.font: xft:BlexMono Nerd Font Mono:pixelsize=16
 URxvt.scrollBar: false
 
 
@@ -55,7 +55,7 @@ URxvt.scrollBar: false
 
 ! Mikazuki
 *.foreground:   #ffffff
-*.background:   #000000
+*.background:   #171717
 *.cursorColor:  #ffffff
 *.color0:       #2a1d17
 *.color8:       #4f362b
