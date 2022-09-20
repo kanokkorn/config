@@ -1,3 +1,6 @@
+" minimal vim configuration
+" No plug-in required, works with most system
+
 syntax on
 
 " color
@@ -13,19 +16,19 @@ let g:netrw_liststyle=3
 
 set mouse=a
 set number
-set linebreak 
+set linebreak
 set expandtab
 set showmatch
 set smartindent
 set smarttab
-set hlsearch   
+set hlsearch
 set incsearch
-set ignorecase    
+set ignorecase
 set autoindent
 set cindent
 set expandtab
 set tabstop=2
 set shiftwidth=2
-set ruler        
-set undolevels=1000     
-set backspace=indent,eol,start                
+set ruler
+set undolevels=1000
+set backspace=indent,eol,start
