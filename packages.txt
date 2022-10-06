@@ -1,0 +1,22 @@
+Debian based
+------------
+
+Setup package for TTY first time
+
+-  sudo apt install -y tmux git htop
+
+get config files for basic usage
+
+-  git clone https://github.com/kanokkorn/config.git
+
+clone & build bspwm with sxhkd
+
+-  git clone --recursive-submodules https://github.com/baskerville/bspwm
+
+FreeBSD
+-------
+
+Setup TTY for first time
+
+  sudo pkg install tmux git htop
+
