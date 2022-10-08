@@ -7,7 +7,7 @@ URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 ! URxvt.transparent:   true
 URxvt.tintColor:     white
 URxvt.shading:       0
-URxvt.font: xft:BlexMono Nerd Font Mono:pixelsize=16
+URxvt.font: xft:DejaVu Sans Mono:pixelsize=16
 URxvt.scrollBar: false
 
 
