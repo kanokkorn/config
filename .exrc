@@ -1,5 +1,9 @@
-set autoindent
+" General config
+" type :set all to check all available options
+
 set shiftwidth=2
-set smartindent
-set smarttab
-set softtabstop=2
+set tabstop=2
+set showmatch
+set searchincr
+set ruler
+set ignorecase
