@@ -1,22 +1,33 @@
+Packages
+--------
+
+list of essential packages and libraries for build a project from scratch.
+
+on fresh install system, update package manager is recommended
+
 Debian based
 ------------
 
-Setup package for TTY first time
+based on debian-testing, stable channel or some distro might not have it list in package manager
 
--  sudo apt install -y tmux git htop
+- baseline tools
 
-get config files for basic usage
+  sudo gcc make curl git
 
--  git clone https://github.com/kanokkorn/config.git
+- bspwm (tiling window manager)
 
-clone & build bspwm with sxhkd
+  libxcb-xinerama0-dev libxcb-icccm4-dev libxcb-randr0-dev libxcb-util0-dev libxcb-ewmh-dev\
+  libxcb-keysyms1-dev libxcb-shape0-dev
 
--  git clone --recursive-submodules https://github.com/baskerville/bspwm
+- sxhkd (X event input handler)
+
+  libxcb-keysyms1-dev
+
+- rofi (window switcher, apps launcher)
+
+  meson flex bison
 
 FreeBSD
 -------
 
-Setup TTY for first time
-
-  sudo pkg install tmux git htop
-
+TBD
