@@ -129,7 +129,7 @@ super + alt + shift + {h,j,k,l}
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
-# Media keys
+# Media keys for Dell keyboard
 # consider switching to sndio, pulseaudio will be deprecated in future
 XF86AudioRaiseVolume
 	amixer -D pulse sset Master 5%+ unmute
