@@ -1,7 +1,7 @@
 configuration files
 -------------------
 
-This repo contain these program config files
+This repo contain these program config files for debian-based and FreeBSD
 
 - sh (planned)
 - bash
