@@ -1,0 +1,5 @@
+#!/bin/sh
+
+xrandr -s 1280x720
+sxhkd &
+exec bspwm
