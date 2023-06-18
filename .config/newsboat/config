@@ -1,3 +1,4 @@
+# config from -> https://forums.freebsd.org/threads/newsboat-rss-reader-enable-vim-key-bindings.69448/
 # general settings
 auto-reload yes
 max-items 50
