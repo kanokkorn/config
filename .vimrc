@@ -1,21 +1,19 @@
-" minimal vim configuration
-" No plug-in required, works with most system
-
-syntax on
-
-" color
-colorscheme slate
+" visual customise
+syntax enable
+set fillchars+=vert:│
 hi StatusLine ctermbg=105 ctermfg=236
 hi StatusLineNC ctermbg=240 ctermfg=236
 hi VertSplit ctermfg=236
+hi VertSplit cterm=NONE
 hi Search ctermfg=141 ctermbg=238
+hi Visual ctermfg=36 ctermbg=238
 
 " netrw
 let g:netrw_altv=1
 let g:netrw_liststyle=3
 
-set mouse=a
-set number
+set nocompatible
+set ttymouse=xterm2
 set linebreak
 set expandtab
 set showmatch
