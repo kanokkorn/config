@@ -1,43 +1,17 @@
-syntax on
-
-" plug
-call plug#begin('~')
-Plug 'junegunn/vim-easy-align'
-Plug 'iCyMind/NeoSolarized'
-Plug 'joshdick/onedark.vim'
-Plug 'tomasr/molokai'
-Plug 'junegunn/vim-easy-align'
-Plug 'joshdick/onedark.vim'
-Plug 'sickill/vim-monokai'
-Plug 'sainnhe/sonokai'
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'iCyMind/NeoSolarized'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'preservim/nerdtree'
-call plug#end()
-
-" air-line
-let g:airline_powerline_fonts = 1
-
-if !exists('g:airline_symbols')
-	let g:airline_symbols = {}
-endif
-
-" sonokai
-let g:sonokai_style = 'atlantis'
-
-" color
-colo onedark
-
-" color and font
-colo onedark
-set guifont=Cascadia \Code:h12
-
+" visual customise
+" keep it minimal & match with vim config
+syntax enable
+set fillchars+=vert:│
 hi StatusLine ctermbg=105 ctermfg=236
 hi StatusLineNC ctermbg=240 ctermfg=236
 hi VertSplit ctermfg=236
+hi VertSplit cterm=NONE
 hi Search ctermfg=141 ctermbg=238
+hi Visual ctermfg=36 ctermbg=238
+
+" awkward keymap for term
+" CTRL+x is more egonomic than CTRL+\ CTRL+n
+tnoremap <C-x> <C-\><C-n>
 
 set number
 set linebreak
