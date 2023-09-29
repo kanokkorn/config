@@ -1,0 +1,19 @@
+# make sure to have these font installed, use `fc-list | grep {fontname}` to check avaliable fonts
+font:
+  normal:
+    family: DejaVu Sans Mono
+    style : Regular
+  bold:
+    family: DejaVu Sans Mono
+    style : Regular
+    style : Bold
+  italic:
+    family: DejaVu Sans Mono
+    style : Regular
+    style : Italic
+  bold_italic:
+    family: DejaVu Sans Mono
+    style : Regular
+    style : Bold Italic
+
+  size: 10
