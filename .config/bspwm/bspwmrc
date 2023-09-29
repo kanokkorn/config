@@ -1,12 +1,13 @@
 #!/bin/sh
 
 # optinal: feh for background image
-# feh --bg-fill ~/Pictures/grey.png
+# feh --bg-fill --scale-down ~/Pictures/grey.png
 
 # optinal: polybar & polybar-themes for status bar
 # $HOME/.config/polybar/launch.sh --forest
 # pgrep -x polybar > /dev/null || $HOME/.config/polybar/launch.sh --forest &
 
+# make sure daemon will always start correctly
 pgrep -x sxhkd   > /dev/null || sxhkd &
 # optinal: picom for blur & rounded corner
 # picom --experimental-backends &
@@ -21,10 +22,3 @@ bspc config normal_border_color '#1B1A17'
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
-
-# unknown stuff
-bspc rule -a Gimp desktop='^8' state=floating follow=on
-bspc rule -a Firefox desktop='^2'
-bspc rule -a mplayer2 state=floating
-bspc rule -a Kupfer.py focus=on
-bspc rule -a Screenkey manage=off
