@@ -10,13 +10,17 @@ super + Return
 super + @space
   {setxkbmap th, setxkbmap us}
 
-# program launcher
+# rofi as program launcher, mapped to match MacOS and Windows
 alt + space
   rofi -modi drun -drun-use-desktop-cache -show drun
 
-# screenshot
+# full screen screenshot
 Print
   scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/shots/'
+
+# mouse select screenshot
+super + shift + s
+  sleep 0.2; scrot -s '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/shots/'
 
 # make sxhkd reload its configuration files:
 super + Escape
