@@ -4,17 +4,16 @@
 
 # terminal emulator
 super + Return
-	urxvt
-
+	alacritty
 # language switcher
 super + @space
   {setxkbmap th, setxkbmap us}
 
-# rofi as program launcher, mapped to match MacOS and Windows
+# program launcher
 alt + space
-  rofi -modi drun -drun-use-desktop-cache -show drun
+  rofi -modi drun -show drun
 
-# full screen screenshot
+# fullscreen screenshot
 Print
   scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/shots/'
 
@@ -22,13 +21,20 @@ Print
 super + shift + s
   sleep 0.2; scrot -s '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/shots/'
 
+# screen magnifier with boomer,
+# source: https://github.com/tsoding/boomer
+# symlink to `/usr/local/bin` first or it won't work
+# sudo ln -s ~/.nimble/bin/boomer /usr/local/bin/boomer
+ctrl + shift + z
+  boomer
+
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
-
 #
 # bspwm hotkeys
 #
+
 
 # quit/restart bspwm
 super + alt + {q,r}
@@ -49,8 +55,6 @@ super + y
 # swap the current node and the biggest node
 super + g
 	bspc node -s biggest
-
-
 #
 # state/flags
 #
@@ -78,21 +82,18 @@ super + {p,b,comma,period}
 # focus the next/previous node in the current desktop
 super + {_,shift + }c
 	bspc node -f {next,prev}.local
-
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
-
 # focus the last node/desktop
 super + {grave,Tab}
 	bspc {node,desktop} -f last
 
 # focus the older or newer node in the focus history
 super + {o,i}
-	bspc wm -h off; \
-	bspc node {older,newer} -f; \
+	bspc wm -h off;\
+	bspc node {older,newer} -f;\
 	bspc wm -h on
-
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
@@ -104,19 +105,15 @@ super + {_,shift + }{1-9,0}
 # preselect the direction
 super + ctrl + {h,j,k,l}
 	bspc node -p {west,south,north,east}
-
 # preselect the ratio
 super + ctrl + {1-9}
 	bspc node -o 0.{1-9}
-
 # cancel the preselection for the focused node
 super + ctrl + space
 	bspc node -p cancel
-
 # cancel the preselection for the focused desktop
 super + ctrl + shift + space
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
-
 #
 # move/resize
 #
@@ -133,13 +130,22 @@ super + alt + shift + {h,j,k,l}
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
-# Media keys for Dell keyboard
-# consider switching to sndio, pulseaudio will be deprecated in future
+## Media keys
 XF86AudioRaiseVolume
 	amixer -D pulse sset Master 5%+ unmute
 
 XF86AudioLowerVolume
 	amixer -D pulse sset Master 5%- unmute
 
+XF86AudioPlay
+  playerctl play-pause
+
+XF86AudioPrev
+  playerctl previous
+
+XF86AudioNext
+  playerctl next
+
 XF86AudioMute
 	amixer set Master toggle
+
