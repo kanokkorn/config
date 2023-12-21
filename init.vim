@@ -13,6 +13,9 @@ hi Visual ctermfg=36 ctermbg=238
 " CTRL+x is more egonomic than CTRL+\ CTRL+n
 tnoremap <C-x> <C-\><C-n>
 
+" underline paste
+tnoremap P pu<CR>
+
 " font for Neovim QT
 " GuiFont {font_name}:h{size}
 
