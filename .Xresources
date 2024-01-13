@@ -1,11 +1,34 @@
-! --------- xterm ----------
-! for default settings, use monospace:pixelsize=13
-! reserved setting for Nerd Font
-! *.font: xft:BlexMono Nerd Font Mono:pixelsize=13
-*.font: xft:monospace:pixelsize=13
-
-! --------- urxvt ----------
 ! keymap
+*.font: xft:FiraMono Nerd Font Mono:pixelsize=14
+!XTerm*keysym.Shift-Control-V: eval:paste_clipboard
+!XTerm*keysym.Shift-Control-C: eval:selection_to_clipboard
+!
+!! looks
+!! URxvt*blurRadius: 10
+!! URxvt.transparent:   true
+!XTerm.tintColor:     white
+!XTerm.shading:       0
+!XTerm.font: xft:BlexMono Nerd Font Mono:pixelsize=10
+!! URxvt.font: xft:Ubuntu Sans:pixelsize=16
+!XTerm.scrollBar: false
+!
+!! scale fonts
+!XTerm.keysym.C-S-plus: font-size:increase
+!XTerm.keysym.C-KP_Add: font-size:increase
+!XTerm.keysym.C-S-underscore: font-size:decrease
+!XTerm.keysym.C-KP_Subtract: font-size:decrease
+!XTerm.keysym.C-0: font-size:reset
+!XTerm.keysym.C-KP_0: font-size:reset
+
+! keymap-xterm
+XTerm*selectToClipboard: true
+*VT100*translations:      #override \n\
+  Shift <Key>Home:    copy-selection(SELECT) \n\
+  Shift <Key>Insert:  copy-selection(SELECT) \n\
+  Ctrl Shift <Key>C:  copy-selection(SELECT) \n\
+  Ctrl Shift <Key>V:  insert-selection(SELECT)
+
+! keymap-urxvt
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 
@@ -14,7 +37,7 @@ URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
 ! URxvt.transparent:   true
 URxvt.tintColor:     white
 URxvt.shading:       0
-URxvt.font: xft:BlexMono Nerd Font Mono:pixelsize=14
+URxvt.font: xft:BlexMono Nerd Font Mono:pixelsize=12
 ! URxvt.font: xft:Ubuntu Sans:pixelsize=16
 URxvt.scrollBar: false
 
@@ -68,24 +91,44 @@ URxvt.keysym.C-KP_0: font-size:reset
 !*.color7:     #666666
 !*.color15:    #FFFFFF
 
-!! Mikazuki
-*.foreground:   #ffffff
-*.background:   #171717
-*.cursorColor:  #ffffff
-*.color0:       #2a1d17
-*.color8:       #4f362b
-*.color1:       #da1657
-*.color9:       #da4375
-*.color2:       #3ea250
-*.color10:      #6cb87a
-*.color3:       #e3d33d
-*.color11:      #e3da84
-*.color4:       #3ea290
-*.color12:      #8ca8a3
-*.color5:       #ff850d
-*.color13:      #ffa64f
-*.color6:       #8c16da
-*.color14:      #a167c7
-*.color7:       #e9e9e9
-*.color15:      #fdfdfd
+!!! Mikazuki
+! *.foreground:   #ffffff
+! *.background:   #171717
+! *.cursorColor:  #ffffff
+! *.color0:       #2a1d17
+! *.color8:       #4f362b
+! *.color1:       #da1657
+! *.color9:       #da4375
+! *.color2:       #3ea250
+! *.color10:      #6cb87a
+! *.color3:       #e3d33d
+! *.color11:      #e3da84
+! *.color4:       #3ea290
+! *.color12:      #8ca8a3
+! *.color5:       #ff850d
+! *.color13:      #ffa64f
+! *.color6:       #8c16da
+! *.color14:      #a167c7
+! *.color7:       #e9e9e9
+! *.color15:      #fdfdfd
 
+!! shapeshifter
+*.foreground:   #c5c8c6
+*.background:   #1d1f21
+*.cursorColor:  #c5c8c6
+*.color0:       #282a2e
+*.color8:       #373b41
+*.color1:       #a54242
+*.color9:       #cc6666
+*.color2:       #8c9440
+*.color10:      #b5bd68
+*.color3:       #de935f
+*.color11:      #f0c674
+*.color4:       #5f819d
+*.color12:      #81a2be
+*.color5:       #85678f
+*.color13:      #b294bb
+*.color6:       #5e8d87
+*.color14:      #8abeb7
+*.color7:       #707880
+*.color15:      #c5c8c6
