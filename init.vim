@@ -2,12 +2,14 @@
 " keep it minimal & match with vim config
 syntax enable
 set fillchars+=vert:│
-hi StatusLine ctermbg=105 ctermfg=236
-hi StatusLineNC ctermbg=240 ctermfg=236
-hi VertSplit ctermfg=236
-hi VertSplit cterm=NONE
-hi Search ctermfg=141 ctermbg=238
-hi Visual ctermfg=36 ctermbg=238
+hi StatusLine   ctermbg=233   ctermfg=48
+hi StatusLineNC ctermbg=233   ctermfg=240
+hi VertSplit    ctermfg=236   ctermbg=NONE
+" hi Search       ctermfg=48    ctermbg=233
+" hi Visual       ctermfg=48    ctermbg=233
+hi TabLineFill  ctermfg=236   ctermbg=233
+hi TabLineSel   ctermfg=233   ctermbg=48
+hi TabLine      ctermfg=15    ctermbg=236
 
 " awkward keymap for term
 " CTRL+x is more egonomic than CTRL+\ CTRL+n
