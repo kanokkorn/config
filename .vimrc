@@ -14,6 +14,11 @@ hi TabLine      ctermfg=15    ctermbg=236
 " netrw
 let g:netrw_altv=1
 let g:netrw_liststyle=3
+let g:netrw_keepdir=0
+let g:netrw_winsize=20
+map <Space> <Leader>
+nnoremap <leader>f :Lexplore %:p:h<CR>
+nnoremap <Leader>da :Lexplore<CR>
 
 set splitright
 set nocompatible
