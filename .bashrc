@@ -5,8 +5,7 @@
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
-      *) return;;
-esac
+      *) return;; esac
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
@@ -57,7 +56,8 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+# PS1='${debian_chroot:+($debian_chroot)}\[\033[00;32m\]\u@\[\033[01;31m\]\h:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[01;36m\]@\h:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -76,9 +76,8 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
@@ -90,9 +89,73 @@ fi
 export PATH=/usr/local/cuda-11.0/bin${PATH:+:${PATH}}$
 
 # some more ls aliases
-alias ll='ls -alF'
+alias ll='exa -lgb'
 alias la='ls -A'
 alias l='ls -CF'
+
+alias neofetch='neofetch --ascii ~/.config/neofetch/ascii/weeb'
+alias nvi='nxvi'
+
+
+# `ef` for `edit file`
+# alias ef='find . -type f 2>/dev/null | fzf --preview "batcat -n --color=always {}" --height 40% --layout=reverse --border | xargs -r -o vi'
+# alias ef="find . -type f ! -path '*.var*' ! -path '*.rustup*' 2>/dev/null |fzf-tmux --header-first --header $'Edit File\n───────\n' --layout=reverse  -p | xargs -r -o vi"
+# alias ef="find . -type f ! -path '*.var*' ! -path '*.rustup*' 2>/dev/null |fzf-tmux --header-first --header $'Edit File\n───────\n' --layout=reverse  -p | xargs -r -o vi"
+# alias ef="fd --type file --hidden --no-ignore |fzf-tmux --header-first --header $'Edit File\n───────\n' --layout=reverse  -p | xargs -r -o vi"
+
+# `sd` for `switch directory`
+# alias sd='cd $(find * -type d 2>/dev/null | fzf --height 40% --layout=reverse --border)'
+# alias sd='cd $(find ~ -type d ! -path "*.var*" ! -path "*.rustup*" 2>/dev/null | fzf-tmux --header-first --header "search directory" --layout=reverse -p)'
+
+f() {
+  file=$(find . -type f ! -path '*.var*' ! -path '*.rustup*' 2>/dev/null |fzf-tmux --header-first --header $'Edit File\n───────\n' --layout=reverse -p)
+  if [ -z "$file" ]; then
+    cd .
+  else
+    vi "$file"
+  fi
+}
+
+d() {
+  dir=$(find ~ -type d ! -path "*.var*" ! -path "*.rustup*" 2>/dev/null | fzf-tmux --header-first --header 'search directory' --layout=reverse -p)
+  if [ -z "$dir" ]; then
+    cd .
+  else
+    cd "$dir"
+  fi
+}
+
+dl() {
+  dir=$(find * -type d ! -path "*.var*" ! -path "*.rustup*" 2>/dev/null | fzf-tmux --header-first --header 'search directory [local]' --layout=reverse -p)
+  if [ -z "$dir" ]; then
+    cd .
+  else
+    cd "$dir"
+  fi
+}
+# alias sd='cd $(fd --type directory --hidden . /home/mitsuha | fzf-tmux --header-first --header "search directory" --layout=reverse -p)'
+# alias sd=''
+
+# alias gsc='git show $(git log --oneline 2>/dev/null | head -n1 | cut -d " " -f1 | fzf --height 40 --layout=reverse --border)'
+alias gsc='git show $(git log --oneline 2>/dev/null | fzf --height 40 --layout=reverse --border | head -n1 | cut -d " " -f1)'
+
+# cat to batcat
+alias cat='bsdcat'
+alias fd='fdfind'
+alias less='bat'
+
+# screenshot & terminal clock
+scrot '%Y-%m-%d_$wx$h.png' -e 'mv $f ~/shots/'
+alias peaclock='peaclock --config "~/.config/peaclock/config/binary"'
+
+# file explorer
+BLK="0B" CHR="0B" DIR="04" EXE="06" REG="00" HARDLINK="06" SYMLINK="06" MISSING="00" ORPHAN="09" FIFO="06" SOCK="0B" OTHER="06"
+export NNN_FCOLORS="$BLK$CHR$DIR$EXE$REG$HARDLINK$SYMLINK$MISSING$ORPHAN$FIFO$SOCK$OTHER"
+export NNN_TMPFILE=/tmp/.lastd 
+alias nnn='nnn -d -e -H -r'
+
+# QR-code generator
+alias qr='qrencode -t UTF8'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -117,3 +180,40 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+export PATH="$PATH:$HOME/.spicetify"
+. "$HOME/.cargo/env"
+
+
+# nim lang executable
+export PATH=/home/mitsuha/.nimble/bin:$PATH
+
+# deno
+export DENO_INSTALL="/home/mitsuha/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH=$BUN_INSTALL/bin:$PATH
+export PATH=$PATH:/usr/local/go/bin
+
+# ollama
+export OLLAMA_MODELS="/media/mitsuha/wdc-ext/llm_model/"
+
+# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+# --color=fg:#d0d0d0,fg+:#d0d0d0,bg:#121212,bg+:#262626
+# --color=hl:#5faf5f,hl+:#00ff5f,info:#afaf87,marker:#87ff00
+# --color=prompt:#00ff5f,spinner:#d7d7ff,pointer:#5f00ff,header:#87afaf
+# --color=border:#262626,query:#d9d9d9'
+
+# export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+# --color=fg:#d0d0d0,fg+:#d0d0d0,bg:#121212,bg+:#262626
+# --color=hl:#836FFF,hl+:#15F5BA,info:#afaf87,marker:#211951
+# --color=prompt:#d7005f,spinner:#af5fff,pointer:#211951,header:#87afaf
+# --color=border:#262626,query:#d9d9d9'
+
+# export FZF_DEFAULT_OPTS=" \
+#          --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+#          --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+#          --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+. "/home/mitsuha/.deno/env"
