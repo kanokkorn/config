@@ -1,8 +1,89 @@
 ! keymap
-*.font: xft:FiraMono Nerd Font Mono:pixelsize=14
-!XTerm*keysym.Shift-Control-V: eval:paste_clipboard
-!XTerm*keysym.Shift-Control-C: eval:selection_to_clipboard
-!
+! *.font: xft:BlexMono Nerd Font Mono:pixelsize=14
+
+!! xterm stuff - old one
+!#ifdef xterm
+!! Clipboard
+!xterm*keysym.Shift-Control-V: eval:paste_clipboard
+!xterm*keysym.Shift-Control-C: eval:selection_to_clipboard
+!! OSC52 
+!xterm*disallowedWindowOps: 20,21,SetXprop
+!! xterm style
+!! XTerm.tintColor:     white
+!! XTerm.shading:       0
+!!*.font: xft: JetBrainsMono Nerd Font Mono:pixelsize=8
+!! scale fonts
+!*keysym.C-S-plus: font-size:increase
+!*keysym.C-KP_Add: font-size:increase
+!*keysym.C-S-underscore: font-size:decrease
+!*keysym.C-KP_Subtract: font-size:decrease
+!*keysym.C-0: font-size:reset
+!*keysym.C-KP_0: font-size:reset
+!! Mikazuki
+!*foreground:   #ffffff
+!*background:   #171717
+!*cursorColor:  #ffffff
+!*color0:       #2a1d17
+!*color8:       #4f362b
+!*color1:       #da1657
+!*color9:       #da4375
+!*color2:       #3ea250
+!*color10:      #6cb87a
+!*color3:       #e3d33d
+!*color11:      #e3da84
+!*color4:       #3ea290
+!*color12:      #8ca8a3
+!*color5:       #ff850d
+!*color13:      #ffa64f
+!*color6:       #8c16da
+!*color14:      #a167c7
+!*color7:       #e9e9e9
+!*color15:      #fdfdfd
+!#endif
+!! xterm stuff -- update
+*.font: xft:JetBrainsMono Nerd Font Mono:pixelsize=13
+! OSC52 & Window Ops
+XTerm*disallowedWindowOps: 20,21,SetXprop
+XTerm*selectToClipboard: true
+XTerm*translations: #override \
+    Shift Ctrl <Key>C: copy-selection(CLIPBOARD) \n\
+    Shift Ctrl <Key>V: insert-selection(CLIPBOARD) \n\
+    Ctrl Shift <Key>plus: larger-font() \n\
+    Ctrl <Key>KP_Add: larger-font() \n\
+    Ctrl Shift <Key>underscore: smaller-font() \n\
+    Ctrl <Key>KP_Subtract: smaller-font() \n\
+    Ctrl <Key>0: set-vt-font(d)
+
+! Rosé Pine Dark Colorscheme
+XTerm*foreground:   #e0def4
+XTerm*background:   #191724
+XTerm*cursorColor:  #524f67
+
+! Black
+XTerm*color0:       #26233a
+XTerm*color8:       #6e6a86
+! Red
+XTerm*color1:       #eb6f92
+XTerm*color9:       #eb6f92
+! Green
+XTerm*color2:       #31748f
+XTerm*color10:      #31748f
+! Yellow
+XTerm*color3:       #f6c177
+XTerm*color11:      #f6c177
+! Blue
+XTerm*color4:       #9ccfd8
+XTerm*color12:      #9ccfd8
+! Magenta
+XTerm*color5:       #c4a7e7
+XTerm*color13:      #c4a7e7
+! Cyan
+XTerm*color6:       #ebbcba
+XTerm*color14:      #ebbcba
+! White
+XTerm*color7:       #e0def4
+XTerm*color15:      #e0def4
+
 !! looks
 !! URxvt*blurRadius: 10
 !! URxvt.transparent:   true
@@ -20,27 +101,27 @@
 !XTerm.keysym.C-0: font-size:reset
 !XTerm.keysym.C-KP_0: font-size:reset
 
-! keymap-xterm
-XTerm*selectToClipboard: true
-*VT100*translations:      #override \n\
-  Shift <Key>Home:    copy-selection(SELECT) \n\
-  Shift <Key>Insert:  copy-selection(SELECT) \n\
-  Ctrl Shift <Key>C:  copy-selection(SELECT) \n\
-  Ctrl Shift <Key>V:  insert-selection(SELECT)
-
 ! keymap-urxvt
 URxvt.keysym.Shift-Control-V: eval:paste_clipboard
 URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+URxvt.iso14755: false
+URxvt.iso14755_52: false
 
 ! looks
 ! URxvt*blurRadius: 10
 ! URxvt.transparent:   true
 URxvt.tintColor:     white
 URxvt.shading:       0
-! URxvt.font: xft:BlexMono Nerd Font Mono:pixelsize=12
-URxvt.font: xft: Iosevka Nerd Font:pixel:size=14
-! URxvt.font: xft:Ubuntu Sans:pixelsize=16
-URxvt.scrollBar: false
+! URxvt.font: xft: Iosevka Nerd Font:pixel:size=14
+! URxvt.font: xft: IosevkaTerm NFM:pixel:size=12
+! URxvt.font: xft: UbuntuMono Nerd Font Mono:pixel:size=12
+! URxvt.font: xft: FiraMono Nerd Font Mono:pixelsize=16
+URxvt.font: xft: JetBrainsMono Nerd Font Mono:pixelsize=16
+! URxvt.font: xft: ProggyClean CE Nerd Font:pixelsize=22
+! URxvt.font: xft: BlexMono Nerd Font Mono:pixelsize=14
+
+! URxvt.font: xft:Ubuntu Sans:pixelsize=16 URxvt.scrollBar: false
+URxvt.letterSpace: 0
 
 ! scale fonts
 URxvt.keysym.C-S-plus: font-size:increase
@@ -114,22 +195,401 @@ URxvt.keysym.C-KP_0: font-size:reset
 ! *.color15:      #fdfdfd
 
 !! shapeshifter
-*.foreground:   #c5c8c6
-*.background:   #1d1f21
-*.cursorColor:  #c5c8c6
-*.color0:       #282a2e
-*.color8:       #373b41
-*.color1:       #a54242
-*.color9:       #cc6666
-*.color2:       #8c9440
-*.color10:      #b5bd68
-*.color3:       #de935f
-*.color11:      #f0c674
-*.color4:       #5f819d
-*.color12:      #81a2be
-*.color5:       #85678f
-*.color13:      #b294bb
-*.color6:       #5e8d87
-*.color14:      #8abeb7
-*.color7:       #707880
-*.color15:      #c5c8c6
+!! *.foreground:   #c5c8c6
+!! *.background:   #1d1f21
+!! *.cursorColor:  #c5c8c6
+!! *.color0:       #282a2e
+!! *.color8:       #373b41
+!! *.color1:       #a54242
+!! *.color9:       #cc6666
+!! *.color2:       #8c9440
+!! *.color10:      #b5bd68
+!! *.color3:       #de935f
+!! *.color11:      #f0c674
+!! *.color4:       #5f819d
+!! *.color12:      #81a2be
+!! *.color5:       #85678f
+!! *.color13:      #b294bb
+!! *.color6:       #5e8d87
+!! *.color14:      #8abeb7
+!! *.color7:       #707880
+!! *.color15:      #c5c8c6
+
+!! brewer
+!*.foreground:   #b7b8b9
+!*.background:   #0c0d0e
+!*.cursorColor:  #b7b8b9
+!*.color0:       #0c0d0e
+!*.color8:       #737475
+!*.color1:       #e31a1c
+!*.color9:       #e31a1c
+!*.color2:       #31a354
+!*.color10:      #31a354
+!*.color3:       #dca060
+!*.color11:      #dca060
+!*.color4:       #3182bd
+!*.color12:      #3182bd
+!*.color5:       #756bb1
+!*.color13:      #756bb1
+!*.color6:       #80b1d3
+!*.color14:      #80b1d3
+!*.color7:       #b7b8b9
+!*.color15:      #fcfdfe
+
+!! atelierseaside
+!*.foreground:   #8ca68c
+!*.background:   #131513
+!*.cursorColor:  #8ca68c
+!*.color0:       #131513
+!*.color8:       #687d68
+!*.color1:       #e6193c
+!*.color9:       #e6193c
+!*.color2:       #29a329
+!*.color10:      #29a329
+!*.color3:       #c3c322
+!*.color11:      #c3c322
+!*.color4:       #3d62f5
+!*.color12:      #3d62f5
+!*.color5:       #ad2bee
+!*.color13:      #ad2bee
+!*.color6:       #1999b3
+!*.color14:      #1999b3
+!*.color7:       #8ca68c
+!*.color15:      #f0fff0
+
+! ash
+!*.foreground:   #c7ccd1
+!*.background:   #1c2023
+!*.cursorColor:  #c7ccd1
+!*.color0:       #1c2023
+!*.color8:       #747c84
+!*.color1:       #c7ae95
+!*.color9:       #c7ae95
+!*.color2:       #95c7ae
+!*.color10:      #95c7ae
+!*.color3:       #aec795
+!*.color11:      #aec795
+!*.color4:       #ae95c7
+!*.color12:      #ae95c7
+!*.color5:       #c795ae
+!*.color13:      #c795ae
+!*.color6:       #95aec7
+!*.color14:      #95aec7
+!*.color7:       #c7ccd1
+!*.color15:      #f3f4f5
+
+! railscast
+!*.foreground:   #e6e1dc
+!*.background:   #2b2b2b
+!*.cursorColor:  #e6e1dc
+!*.color0:       #2b2b2b
+!*.color8:       #5a647e
+!*.color1:       #da4939
+!*.color9:       #da4939
+!*.color2:       #a5c261
+!*.color10:      #a5c261
+!*.color3:       #ffc66d
+!*.color11:      #ffc66d
+!*.color4:       #6d9cbe
+!*.color12:      #6d9cbe
+!*.color5:       #b6b3eb
+!*.color13:      #b6b3eb
+!*.color6:       #519f50
+!*.color14:      #519f50
+!*.color7:       #e6e1dc
+!*.color15:      #f9f7f3
+
+! gothem
+! *.foreground:   #98d1ce
+! *.background:   #0a0f14
+! *.cursorColor:  #98d1ce
+! *.color0:       #0a0f14
+! *.color8:       #10151b
+! *.color1:       #c33027
+! *.color9:       #d26939
+! *.color2:       #26a98b
+! *.color10:      #081f2d
+! *.color3:       #edb54b
+! *.color11:      #245361
+! *.color4:       #195465
+! *.color12:      #093748
+! *.color5:       #4e5165
+! *.color13:      #888ba5
+! *.color6:       #33859d
+! *.color14:      #599caa
+! *.color7:       #98d1ce
+! *.color15:      #d3ebe9
+
+!! user77
+! *.foreground:   #b2a191
+! *.background:   #171717
+! *.cursorColor:  #b2a191
+! ! black
+! *.color0:       #202020
+! *.color8:       #404040
+! ! red
+! *.color1:       #bf3f34
+! *.color9:       #ff6c5f
+! ! green
+! *.color2:       #707d22
+! *.color10:      #b8ca4b
+! ! yellow
+! *.color3:       #bf7a29
+! *.color11:      #c7a551
+! ! blue
+! *.color4:       #627a92
+! *.color12:      #95b9de
+! ! magenta
+! *.color5:       #75507b
+! *.color13:      #ad7fa8
+! ! cyan
+! *.color6:       #757978
+! *.color14:      #9fa590
+! ! white
+! *.color7:       #b2a191
+! *.color15:      #e8d0c3
+
+
+!! catpucchi - mocha
+!! special
+URxvt.background: #1E1E2E
+URxvt.foreground: #CDD6F4
+!! URxvt.cursorColor: #F5E0DC 
+URxvt.cursorColor: #F79B72
+
+! black
+URxvt.color0: #45475A
+URxvt.color8: #585B70
+
+! red
+URxvt.color1: #F38BA8
+URxvt.color9: #F38BA8
+
+! green
+URxvt.color2: #A6E3A1
+URxvt.color10: #A6E3A1
+
+! yellow
+URxvt.color3: #F9E2AF
+URxvt.color11: #F9E2AF
+
+! blue
+URxvt.color4: #89B4FA
+URxvt.color12: #89B4FA
+
+! magenta
+URxvt.color5: #F5C2E7
+URxvt.color13: #F5C2E7
+
+! cyan
+URxvt.color6: #94E2D5
+URxvt.color14: #94E2D5
+
+! white
+URxvt.color7: #BAC2DE
+URxvt.color15: #A6ADC8
+
+!!! URxvt Appearance
+!URxvt.letterSpace: 0
+URxvt.lineSpace: 0
+URxvt.geometry: 92x24
+!URxvt.internalBorder: 24
+URxvt.cursorBlink: true
+URxvt.cursorUnderline: false
+URxvt.saveline: 2048
+URxvt.scrollBar: false
+!URxvt.scrollBar_right: false
+!URxvt.urgentOnBell: true
+!URxvt.depth: 24
+!URxvt.iso14755: false
+!! -------------------- !!
+!! URxvt Everforest Colorscheme
+!!
+!! To apply:
+!! 1. Save this content to your ~/.Xresources file.
+!! 2. Run: xrdb -merge ~/.Xresources
+!! 3. Restart URxvt or open a new terminal.
+!
+!! General
+! URxvt.foreground: #d3c6aa
+! URxvt.background: #2b3339
+! URxvt.cursorColor: #d3c6aa
+! 
+! ! Black (0)
+! URxvt.color0: #4b5658
+! URxvt.colorBD0: #4b5658
+! 
+! ! Red (1)
+! URxvt.color1: #e67e80
+! URxvt.colorBD1: #e67e80
+! 
+! ! Green (2)
+! URxvt.color2: #a7c080
+! URxvt.colorBD2: #a7c080
+! 
+! ! Yellow (3)
+! URxvt.color3: #dbbc7f
+! URxvt.colorBD3: #dbbc7f
+! 
+! ! Blue (4)
+! URxvt.color4: #7fbbb3
+! URxvt.colorBD4: #7fbbb3
+! 
+! ! Magenta (5)
+! URxvt.color5: #d699b6
+! URxvt.colorBD5: #d699b6
+! 
+! ! Cyan (6)
+! URxvt.color6: #83c092
+! URxvt.colorBD6: #83c092
+! 
+! ! White (7)
+! URxvt.color7: #d3c6aa
+! URxvt.colorBD7: #d3c6aa
+! 
+! ! Bright Black (8)
+! URxvt.color8: #859289
+! URxvt.colorBD8: #859289
+! 
+! ! Bright Red (9)
+! URxvt.color9: #e67e80
+! URxvt.colorBD9: #e67e80
+! 
+! ! Bright Green (10)
+! URxvt.color10: #a7c080
+! URxvt.colorBD10: #a7c080
+! 
+! ! Bright Yellow (11)
+! URxvt.color11: #dbbc7f
+! URxvt.colorBD11: #dbbc7f
+! 
+! ! Bright Blue (12)
+! URxvt.color12: #7fbbb3
+! URxvt.colorBD12: #7fbbb3
+! 
+! ! Bright Magenta (13)
+! URxvt.color13: #d699b6
+! URxvt.colorBD13: #d699b6
+! 
+! ! Bright Cyan (14)
+! URxvt.color14: #83c092
+! URxvt.colorBD14: #83c092
+! 
+! ! Bright White (15)
+! URxvt.color15: #d3c6aa
+! URxvt.colorBD15: #d3c6aa
+
+!! -------------------- !!
+!! URxvt Monochrome Dark with Shades Colorscheme
+!
+! To apply:
+! 1. Save this content to your ~/.Xresources file.
+! 2. Run: xrdb -merge ~/.Xresources
+! 3. Restart URxvt or open a new terminal.
+
+! General
+! URxvt.foreground: #d0d0d0    ! Light grey for primary text
+! URxvt.background: #1c1c1c    ! Very dark grey for background
+! URxvt.cursorColor: #d0d0d0
+! 
+! ! Black (0) - Very dark grey
+! URxvt.color0: #262626
+! URxvt.colorBD0: #262626
+! 
+! ! Red (1) - Dark grey
+! URxvt.color1: #505050
+! URxvt.colorBD1: #505050
+! 
+! ! Green (2) - Medium dark grey
+! URxvt.color2: #606060
+! URxvt.colorBD2: #606060
+! 
+! ! Yellow (3) - Medium grey
+! URxvt.color3: #707070
+! URxvt.colorBD3: #707070
+! 
+! ! Blue (4) - Medium light grey
+! URxvt.color4: #808080
+! URxvt.colorBD4: #808080
+! 
+! ! Magenta (5) - Light grey
+! URxvt.color5: #909090
+! URxvt.colorBD5: #909090
+! 
+! ! Cyan (6) - Lighter grey
+! URxvt.color6: #a0a0a0
+! URxvt.colorBD6: #a0a0a0
+! 
+! ! White (7) - Very light grey (almost white)
+! URxvt.color7: #c0c0c0
+! URxvt.colorBD7: #c0c0c0
+! 
+! ! Bright Black (8) - Slightly lighter dark grey
+! URxvt.color8: #404040
+! URxvt.colorBD8: #404040
+! 
+! ! Bright Red (9) - Slightly lighter dark grey (for consistency)
+! URxvt.color9: #606060
+! URxvt.colorBD9: #606060
+! 
+! ! Bright Green (10) - Slightly lighter medium dark grey
+! URxvt.color10: #707070
+! URxvt.colorBD10: #707070
+! 
+! ! Bright Yellow (11) - Slightly lighter medium grey
+! URxvt.color11: #808080
+! URxvt.colorBD11: #808080
+! 
+! ! Bright Blue (12) - Slightly lighter medium light grey
+! URxvt.color12: #909090
+! URxvt.colorBD12: #909090
+! 
+! ! Bright Magenta (13) - Slightly lighter light grey
+! URxvt.color13: #a0a0a0
+! URxvt.colorBD13: #a0a0a0
+! 
+! ! Bright Cyan (14) - Slightly lighter lighter grey
+! URxvt.color14: #b0b0b0
+! URxvt.colorBD14: #b0b0b0
+! 
+! ! Bright White (15) - Pure white
+! URxvt.color15: #ffffff
+! URxvt.colorBD15: #ffffff
+!!! Rosepine - https://github.com/rose-pine/xresources/blob/main/rose-pine-moon
+!! special
+!*.foreground:   #e0def4
+!*.background:   #232136
+!*.cursorColor:  #e0def4
+!
+!! black
+!*.color0:       #2a273f
+!*.color8:       #393552
+!
+!! red
+!*.color1:       #eb6f92
+!*.color9:       #eb6f92
+!
+!! green
+!*.color2:       #f6c177
+!*.color10:      #f6c177
+!
+!! yellow
+!*.color3:       #ea9a97
+!*.color11:      #ea9a97
+!
+!! blue
+!*.color4:       #3e8fb0
+!*.color12:      #3e8fb0
+!
+!! magenta
+!*.color5:       #c4a7e7
+!*.color13:      #c4a7e7
+!
+!! cyan
+!*.color6:       #9ccfd8
+!*.color14:      #9ccfd8
+!
+!! white
+!*.color7:       #6e6a86
+!*.color15:      #908caak
+!!----------------------!!
