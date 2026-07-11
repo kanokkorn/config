@@ -13,7 +13,7 @@ list of programs
   - alacritty
   - bash
   - bspwm
-  - csh       (planned)
+  - csh
   - dunst
   - gdb
   - gvim
@@ -22,9 +22,9 @@ list of programs
   - lldb      (planned)
   - polybar
   - sxhkd
-  - sh        (planned)
+  - sh(ash)   (planned)
   - tmux
-  - tcsh      (planned)
+  - tcsh
   - neovim
   - urxvt
   - vim
