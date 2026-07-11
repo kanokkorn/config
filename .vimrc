@@ -1,6 +1,10 @@
+if !has('gui_running')
+  set t_Co=256
+endif
+
 " visual customise
 colo habamax
-set norelativenumber
+set number relativenumber
 syntax enable
 set fillchars+=vert:│
 hi StatusLine   ctermbg=233   ctermfg=48
@@ -12,17 +16,13 @@ hi TabLineFill  ctermfg=236   ctermbg=233
 hi TabLineSel   ctermfg=233   ctermbg=48
 hi TabLine      ctermfg=15    ctermbg=236
 
-" omnicomplete
-filetype plugin on
-set omnifunc=syntaxcomplete#Complete
-
-" bracket autocomplete
-inoremap { {}<Esc>ha
-inoremap ( ()<Esc>ha
-inoremap [ []<Esc>ha
-inoremap " ""<Esc>ha
-inoremap ' ''<Esc>ha
-inoremap ` ``<Esc>ha
+" bracket autocomplete - disable, conflict when copy/paste
+" inoremap { {}<Esc>ha
+" inoremap ( ()<Esc>ha
+" inoremap [ []<Esc>ha
+" inoremap " ""<Esc>ha
+" inoremap ' ''<Esc>ha
+" inoremap ` ``<Esc>ha
 
 " netrw
 let g:netrw_altv=1
@@ -45,9 +45,9 @@ nnoremap <leader>f :Lexplore %:p:h<CR>
 " run command & paste stdout
 nnoremap <leader>c :r!
 " substitution (global)
-nnoremap <leader>r :%s/
+nnoremap <leader>r :%s#
 " substitution (visual)
-vnoremap <leader>s :<C-U>%s/\%V
+vnoremap <leader>s :<C-U>%s#\%V
 " force close bgffer
 nnoremap <leader>x :bd! <CR>
 " no highlight
@@ -68,6 +68,9 @@ set wildoptions=pum
 
 " keymap
 vmap y ygv<Esc>
+
+" copy to clipboard
+vnoremap <C-c> "+y"
 
 " autoload view
 autocmd BufWinLeave *.* mkview
@@ -91,8 +94,8 @@ set autoindent
 set cindent
 set expandtab
 set tabstop=2
-set scrolloff=8
 set shiftwidth=2
+set scrolloff=8
 set ruler
 set undolevels=1000
 set backspace=indent,eol,start
