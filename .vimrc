@@ -3,7 +3,15 @@ if !has('gui_running')
 endif
 
 " visual customise
-colo habamax
+set background=dark
+" check for catppuccin theme
+if !empty(globpath(&rtp, 'colors/catppuccin.vim'))
+  colo catppuccin
+else
+  colo habamax
+endif
+
+
 set number relativenumber
 syntax enable
 set fillchars+=vert:│
@@ -69,12 +77,19 @@ set wildoptions=pum
 " keymap
 vmap y ygv<Esc>
 
-" copy to clipboard
-vnoremap <C-c> "+y"
+" Check if Vim was built with clipboard support
+if has('clipboard')
+  set clipboard^=unnamed,unnamedplus
+  vnoremap <C-c> "+y
+else
+  if has('mac') || has('macunix')
+    vnoremap <C-c> :w !pbcopy<CR>u
+  endif
+endif
 
 " autoload view
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview 
+" autocmd BufWinLeave *.* mkview
+" autocmd BufWinEnter *.* silent loadview 
 
 
 " set number
