@@ -1,11 +1,17 @@
+# Qtile config – fixed & cleaned
+# - Font: DejaVu Sans Mono (ships with virtually every Linux distro)
+# - Style: minimal dwm-like (thin borders, zero gap, Tile layout, simple bar)
+# - Keyboard: setxkbmap us,th + grp:caps_toggle (Caps Lock switches EN ↔ TH)
+# - Only real APIs from Qtile + qtile-extras docs
+
 import subprocess
 
 from libqtile import bar, hook, layout, widget
 from libqtile.config import Click, Drag, Group, Key, Screen
 from libqtile.lazy import lazy
 
-# Import qtile-extras popup tools
-from qtile_extras.popup.toolkit import (
+# qtile-extras popup toolkit (official import path from docs)
+from qtile_extras.popup import (
     PopupMenu,
     PopupMenuItem,
     PopupMenuSeparator,
@@ -14,7 +20,7 @@ from qtile_extras.popup.toolkit import (
 )
 
 # ---------------------------------------------------------------------------
-# Colors & Style Settings
+# Colors (dark, minimal)
 # ---------------------------------------------------------------------------
 colors = {
     "background": "#1A1B1E",
@@ -30,53 +36,78 @@ colors = {
     "bar_bg":     "#111215",
 }
 
-FOCUSED_BORDER   = colors["purple"]
-NORMAL_BORDER    = colors["background"]
-BORDER_WIDTH     = 1
-WINDOW_GAP       = 0
+FOCUSED_BORDER = colors["purple"]
+NORMAL_BORDER  = colors["background"]
+BORDER_WIDTH   = 1
+WINDOW_GAP     = 0
 
-mod = "mod4"          # Super key
-alt = "mod1"          # Alt key
+mod = "mod4"
+alt = "mod1"
 terminal = "xterm"
 rofi_cmd = "rofi -modi drun -show drun"
 
-# ---------------------------------------------------------------------------
-# Groups (6 Workspaces with circle symbols)
-# ---------------------------------------------------------------------------
-groups = [Group(i, label="") for i in ["1", "2", "3", "4", "5", "6"]]
+# Portable monospace font available on almost all distros
+FONT = "DejaVu Sans Mono"
 
 # ---------------------------------------------------------------------------
-# Popups (System Menu, Volume, WiFi)
+# Groups (plain numbers – dwm style, no Nerd Font required)
+# ---------------------------------------------------------------------------
+groups = [Group(i) for i in "123456"]
+
+# ---------------------------------------------------------------------------
+# Popups (verified against qtile-extras docs)
 # ---------------------------------------------------------------------------
 
 @lazy.function
 def show_system_menu(qtile):
-    """System menu popup on clicking power icon or launcher."""
     items = [
-        PopupMenuItem(text="System Options", enabled=False),
+        PopupMenuItem(text="System", enabled=False),
         PopupMenuSeparator(),
-        PopupMenuItem(text=" Reload Qtile", mouse_callbacks={"Button1": lazy.reload_config()}),
-        PopupMenuItem(text=" Restart Qtile", mouse_callbacks={"Button1": lazy.restart()}),
+        PopupMenuItem(
+            text="Reload config",
+            mouse_callbacks={"Button1": lazy.reload_config()},
+        ),
+        PopupMenuItem(
+            text="Restart Qtile",
+            mouse_callbacks={"Button1": lazy.restart()},
+        ),
         PopupMenuSeparator(),
-        PopupMenuItem(text=" Lock Screen", mouse_callbacks={"Button1": lazy.spawn("slock")}),
-        PopupMenuItem(text=" Power Off", mouse_callbacks={"Button1": lazy.spawn("poweroff")}),
+        PopupMenuItem(
+            text="Lock",
+            mouse_callbacks={"Button1": lazy.spawn("slock")},
+        ),
+        PopupMenuItem(
+            text="Power off",
+            mouse_callbacks={"Button1": lazy.spawn("poweroff")},
+        ),
     ]
-    menu = PopupMenu.generate(qtile, menuitems=items, background=colors["bar_bg"], foreground=colors["foreground"])
+    menu = PopupMenu.generate(
+        qtile,
+        menuitems=items,
+        background=colors["bar_bg"],
+        foreground=colors["foreground"],
+    )
     menu.show(centered=True)
 
 
 @lazy.function
 def show_volume_popup(qtile):
-    """Volume control popup."""
     try:
-        vol_output = subprocess.check_output(["amixer", "sget", "Master"]).decode("utf-8")
-        vol_line = [line for line in vol_output.splitlines() if "Mono:" in line or "Left:" in line][0]
-        vol = vol_line.split("[")[1].split("%]")[0] + "%"
+        out = subprocess.check_output(["amixer", "sget", "Master"]).decode()
+        line = next(l for l in out.splitlines() if "Mono:" in l or "Left:" in l)
+        vol = line.split("[")[1].split("%]")[0] + "%"
     except Exception:
         vol = "N/A"
 
     controls = [
-        PopupText(text=f"Volume: {vol}", pos_x=0.1, pos_y=0.15, width=0.8, height=0.3, h_align="center"),
+        PopupText(
+            text=f"Volume: {vol}",
+            pos_x=0.1,
+            pos_y=0.15,
+            width=0.8,
+            height=0.3,
+            h_align="center",
+        ),
         PopupText(
             text="[ Mute / Unmute ]",
             pos_x=0.1,
@@ -84,7 +115,7 @@ def show_volume_popup(qtile):
             width=0.8,
             height=0.3,
             h_align="center",
-            mouse_callbacks={"Button1": lambda: subprocess.run(["amixer", "set", "Master", "toggle"])},
+            mouse_callbacks={"Button1": lazy.spawn("amixer set Master toggle")},
         ),
     ]
     popup = PopupRelativeLayout(
@@ -102,23 +133,32 @@ def show_volume_popup(qtile):
 
 @lazy.function
 def show_wifi_popup(qtile):
-    """Network popup showing status and connection."""
     try:
-        ssid = subprocess.check_output(["nmcli", "-t", "-f", "active,ssid", "dev", "wifi"]).decode("utf-8")
-        active_ssid = [line.split(":")[1] for line in ssid.splitlines() if line.startswith("yes")][0]
+        out = subprocess.check_output(
+            ["nmcli", "-t", "-f", "active,ssid", "dev", "wifi"]
+        ).decode()
+        active = [l.split(":")[1] for l in out.splitlines() if l.startswith("yes:")]
+        ssid = active[0] if active else "Not connected"
     except Exception:
-        active_ssid = "Not Connected"
+        ssid = "Not connected"
 
     controls = [
-        PopupText(text=f"SSID: {active_ssid}", pos_x=0.1, pos_y=0.2, width=0.8, height=0.3, h_align="center"),
         PopupText(
-            text="[ Network Settings ]",
+            text=f"SSID: {ssid}",
+            pos_x=0.1,
+            pos_y=0.2,
+            width=0.8,
+            height=0.3,
+            h_align="center",
+        ),
+        PopupText(
+            text="[ Network settings ]",
             pos_x=0.1,
             pos_y=0.6,
             width=0.8,
             height=0.3,
             h_align="center",
-            mouse_callbacks={"Button1": lambda: subprocess.run(["nm-connection-editor"])},
+            mouse_callbacks={"Button1": lazy.spawn("nm-connection-editor")},
         ),
     ]
     popup = PopupRelativeLayout(
@@ -140,36 +180,42 @@ def show_wifi_popup(qtile):
 keys = [
     # Terminal
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
-    # Launcher & Menus
+
+    # Launcher
     Key([alt], "space", lazy.spawn(rofi_cmd), desc="Rofi launcher"),
-    Key([mod], "x", show_system_menu, desc="Show system popup menu"),
+    Key([mod], "x", show_system_menu, desc="System menu"),
 
-    # Window / Layout Controls
+    # Window / layout
     Key([mod], "w", lazy.window.kill(), desc="Close window"),
-    Key([mod], "m", lazy.next_layout(), desc="Toggle layout"),
-    Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Toggle fullscreen"),
-    Key([mod], "t", lazy.window.toggle_floating(), desc="Toggle floating"),
+    Key([mod], "m", lazy.next_layout(), desc="Next layout"),
+    Key([mod], "f", lazy.window.toggle_fullscreen(), desc="Fullscreen"),
+    Key([mod], "t", lazy.window.toggle_floating(), desc="Floating"),
 
-    # Focus navigation
+    # Focus (hjkl)
     Key([mod], "h", lazy.layout.left()),
     Key([mod], "j", lazy.layout.down()),
     Key([mod], "k", lazy.layout.up()),
     Key([mod], "l", lazy.layout.right()),
 
-    # Qtile Controls
+    # Keyboard layout: Caps Lock toggles us ↔ th
+    # (set via setxkbmap -option grp:caps_toggle in autostart)
+    # Widget below still shows current layout; click it to cycle if desired.
+
+    # Qtile
     Key([mod, "control"], "r", lazy.reload_config()),
     Key([mod, alt], "q", lazy.shutdown()),
 ]
 
-# Group shortcuts
-for i, group in enumerate(groups, 1):
+# Group keys
+for i in groups:
     keys.extend([
-        Key([mod], str(i), lazy.group[group.name].toscreen()),
-        Key([mod, "shift"], str(i), lazy.window.togroup(group.name, switch_group=True)),
+        Key([mod], i.name, lazy.group[i.name].toscreen()),
+        Key([mod, "shift"], i.name,
+            lazy.window.togroup(i.name, switch_group=True)),
     ])
 
 # ---------------------------------------------------------------------------
-# Layouts
+# Layouts (dwm-like master + stack)
 # ---------------------------------------------------------------------------
 layouts = [
     layout.Tile(
@@ -178,8 +224,13 @@ layouts = [
         border_width=BORDER_WIDTH,
         margin=WINDOW_GAP,
         ratio=0.55,
+        master_length=1,
+        expand=True,
     ),
-    layout.Max(),
+    layout.Max(
+        border_width=0,
+        margin=0,
+    ),
     layout.Floating(
         border_focus=FOCUSED_BORDER,
         border_normal=NORMAL_BORDER,
@@ -187,22 +238,28 @@ layouts = [
     ),
 ]
 
+floating_layout = layout.Floating(
+    border_focus=FOCUSED_BORDER,
+    border_normal=NORMAL_BORDER,
+    border_width=BORDER_WIDTH,
+)
+
 # ---------------------------------------------------------------------------
-# Helper Separator
+# Helpers
 # ---------------------------------------------------------------------------
 def sep():
     return widget.TextBox(
         text="|",
         foreground=colors["sep"],
-        padding=10,
-        fontsize=12,
+        padding=8,
+        fontsize=11,
     )
 
 # ---------------------------------------------------------------------------
-# Screen Bar Configuration
+# Bar (minimal / dwm-inspired)
 # ---------------------------------------------------------------------------
 widget_defaults = dict(
-    font="Monospace",
+    font=FONT,
     fontsize=12,
     padding=4,
     background=colors["bar_bg"],
@@ -213,19 +270,19 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                # Left 1: Grid Launcher Icon
+                # Launcher
                 widget.TextBox(
-                    text=" 󰕮 ",
-                    fontsize=14,
+                    text=" [apps] ",
+                    fontsize=11,
                     foreground=colors["purple"],
                     mouse_callbacks={"Button1": lazy.spawn(rofi_cmd)},
-                    padding=6,
+                    padding=4,
                 ),
                 sep(),
 
-                # Left 2: Workspaces Circles
+                # Workspaces (plain numbers)
                 widget.GroupBox(
-                    font="Monospace",
+                    font=FONT,
                     fontsize=12,
                     margin_y=0,
                     margin_x=0,
@@ -238,41 +295,40 @@ screens = [
                     highlight_method="text",
                     this_current_screen_border=colors["teal"],
                     disable_drag=True,
+                    hide_unused=False,
                 ),
 
-                # Left Spacer (pushes Clock to center)
                 widget.Spacer(),
 
-                # Middle: Date & Time
+                # Center clock
                 widget.Clock(
-                    format="It's %A, %d %B %Y at %H:%M:%S",
+                    format="%a %d %b  %H:%M",
                     foreground=colors["foreground"],
                     padding=6,
                 ),
 
-                # Right Spacer (pushes icons to right)
                 widget.Spacer(),
 
-                # Right 1: Keyboard Layout Indicator
+                # Keyboard layout indicator (Caps Lock toggles; click widget also cycles)
                 widget.KeyboardLayout(
                     configured_keyboards=["us", "th"],
-                    display_map={"us": "us", "th": "th"},
+                    display_map={"us": "US", "th": "TH"},
                     foreground=colors["foreground"],
                     padding=6,
                 ),
                 sep(),
 
-                # Right 2: WiFi Network Icon & SSID (Click opens WiFi popup)
+                # Wi-Fi (requires python-iwlib; falls back gracefully if missing)
                 widget.TextBox(
-                    text="󰤨",
+                    text="net",
                     foreground=colors["purple"],
-                    fontsize=13,
+                    fontsize=11,
                     padding=4,
                     mouse_callbacks={"Button1": show_wifi_popup},
                 ),
                 widget.Wlan(
-                    format="{ssid}",
-                    disconnected_message="Disconnected",
+                    format="{essid}",
+                    disconnected_message="down",
                     interface="wlan0",
                     foreground=colors["foreground"],
                     padding=4,
@@ -280,11 +336,11 @@ screens = [
                 ),
                 sep(),
 
-                # Right 3: Volume Icon & Meter (Click opens Volume popup)
+                # Volume
                 widget.TextBox(
-                    text="󰕾",
+                    text="vol",
                     foreground=colors["foreground"],
-                    fontsize=13,
+                    fontsize=11,
                     padding=4,
                     mouse_callbacks={"Button1": show_volume_popup},
                 ),
@@ -297,16 +353,16 @@ screens = [
                 ),
                 sep(),
 
-                # Right 4: Power Menu Button (Click opens System Menu popup)
+                # Power menu
                 widget.TextBox(
-                    text="󰐥 ",
+                    text="pwr ",
                     foreground=colors["cyan"],
-                    fontsize=14,
-                    padding=6,
+                    fontsize=11,
+                    padding=4,
                     mouse_callbacks={"Button1": show_system_menu},
                 ),
             ],
-            size=26,
+            size=24,
             background=colors["bar_bg"],
             margin=[0, 0, 0, 0],
         ),
@@ -314,16 +370,28 @@ screens = [
 ]
 
 # ---------------------------------------------------------------------------
-# Mouse & Startup
+# Mouse
 # ---------------------------------------------------------------------------
 mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Drag([mod], "Button1", lazy.window.set_position_floating(),
+         start=lazy.window.get_position()),
+    Drag([mod], "Button3", lazy.window.set_size_floating(),
+         start=lazy.window.get_size()),
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
+# ---------------------------------------------------------------------------
+# Startup
+# ---------------------------------------------------------------------------
 @hook.subscribe.startup_once
 def autostart():
-    subprocess.Popen(["setxkbmap", "-layout", "us,th", "-option", "grp:caps_toggle"])
+    # Primary keyboard switch: Caps Lock toggles between us and th
+    subprocess.Popen([
+        "setxkbmap",
+        "-layout", "us,th",
+        "-option", "grp:caps_toggle",
+    ])
 
+
+# Java apps
 wmname = "LG3D"
